@@ -18,11 +18,11 @@ post:v->data is not null
 */
 void initDynArr(DynArr *v, int capacity)
 {
-v->data = (TYPE *) malloc(sizeof(TYPE) * capacity);
-assert(v->data != 0);
+	v->data = (TYPE *) malloc(sizeof(TYPE) * capacity);
+	assert(v->data != 0);
 
-v->size = 0;
-v->capacity = capacity;
+	v->size = 0;
+	v->capacity = capacity;
 }
 
 /* Allocate and initialize dynamic array.
@@ -35,11 +35,11 @@ and 0 elements in it.
 */
 DynArr* newDynArr(int cap)
 {
-DynArr *r = (DynArr *)malloc(sizeof( DynArr));
-assert(r != 0);
+	DynArr *r = (DynArr *)malloc(sizeof( DynArr));
+	assert(r != 0);
 
-initDynArr(r,cap);
-return r;
+	initDynArr(r,cap);
+	return r;
 }
 
 /* Deallocate data in dynamic array. 
@@ -52,13 +52,14 @@ post:the memory used by v->data is freed
 */
 void freeDynArr(DynArr *v)
 {
-if(v->data != 0)
-{
-free(v->data); /* free the space on the heap */
-v->data = 0;   /* make it point to null */
-}
-v->size = 0;
-v->capacity = 0;
+	if(v->data != 0)
+	{
+		free(v->data); /* free the space on the heap */
+		v->data = 0;   /* make it point to null */
+	}
+
+	v->size = 0;
+	v->capacity = 0;
 }
 
 /* Deallocate data array and the dynamic array structure. 
@@ -70,8 +71,8 @@ post:the memory used by d is freed
 */
 void deleteDynArr(DynArr *v)
 {
-freeDynArr(v);
-free(v);
+	freeDynArr(v);
+	free(v);
 }
 
 /* Resizes the underlying array to be the size cap 
@@ -83,7 +84,7 @@ post:v has capacity newCap
 */
 void _dynArrSetCapacity(DynArr *v, int newCap)
 {
-/* FIXME: You will write this function */
+	/* FIXME: You will write this function */
 }
 
 /* Get the size of the dynamic array
@@ -95,7 +96,7 @@ ret:the size of the dynamic array
 */
 int sizeDynArr(DynArr *v)
 {
-return v->size;
+	return v->size;
 }
 
 /* Adds an element to the end of the dynamic array
