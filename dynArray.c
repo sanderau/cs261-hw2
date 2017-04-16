@@ -131,8 +131,7 @@ void addDynArr(DynArr *v, TYPE val)
 {
 	if(v->size >= v->capacity)
 	{
-		printf("Your array is full! You need to allocate more memory.\n");
-		return;
+		_dynArrSetCapacity(v, v->capacity*2);
 	}
 
 	v->data[v->size] = val;
@@ -151,8 +150,8 @@ ret:value stored at index pos
 */
 TYPE getDynArr(DynArr *v, int pos)
 {
-assert((v!=NULL) && (sizeDynArr(v) > pos) && (pos >= 0));
-return v->data[pos];
+	assert((v!=NULL) && (sizeDynArr(v) > pos) && (pos >= 0));
+	return v->data[pos];
 }
 
 /*Put an item into the dynamic array at the specified location,
@@ -168,8 +167,8 @@ post:index pos contains new value, val
 */
 void putDynArr(DynArr *v, int pos, TYPE val)
 {
-assert((v!=NULL) && (sizeDynArr(v) > pos) && (pos >= 0));
-v->data[pos]=val;
+	assert((v!=NULL) && (sizeDynArr(v) > pos) && (pos >= 0));
+	v->data[pos]=val;
 }
 
 /*Swap two specified elements in the dynamic array
@@ -184,12 +183,12 @@ post:index i now holds the value at j and index j now holds the value at i
 void swapDynArr(DynArr *v, int i, int  j)
 {
 
-TYPE tmp;
-assert((v!=NULL) && (sizeDynArr(v) > i) && (i>= 0)&& (sizeDynArr(v) > j) && (j>= 0));
+	TYPE tmp;
+	assert((v!=NULL) && (sizeDynArr(v) > i) && (i>= 0)&& (sizeDynArr(v) > j) && (j>= 0));
 
-tmp=v->data[i];
-v->data[i]=v->data[j];
-v->data[j]=tmp;
+	tmp=v->data[i];
+	v->data[i]=v->data[j];
+	v->data[j]=tmp;
 
 }
 
@@ -206,7 +205,14 @@ post:the elements past idx are moved back one
 */
 void removeAtDynArr(DynArr *v, int idx)
 {
-/* FIXME: You will write this function */
+	int i;
+
+	for(i = idx; i < v->size; i++)
+	{
+		v->data[i] = v->data[i+1];
+	}
+
+	v->size++;
 }
 
 /* ************************************************************************
@@ -223,7 +229,7 @@ ret:1 if empty, otherwise 0
 */
 int isEmptyDynArr(DynArr *v)
 {
-return sizeDynArr(v)==0?1:0;
+	return sizeDynArr(v)==0?1:0;
 }
 
 /* Push an element onto the top of the stack
@@ -237,7 +243,10 @@ val is on the top of the stack
 */
 void pushDynArr(DynArr *v, TYPE val)
 {
-/* FIXME: You will write this function */
+	if(v->size >= v->capacity) _dynArrSetCapacity(v, v->capacity*2);
+
+	v->data[v->size] = val;
+	v->size++;
 
 }
 
@@ -250,8 +259,8 @@ post:no changes to the stack
 */
 TYPE topDynArr(DynArr *v)
 {
-assert((v!=NULL) && (sizeDynArr(v) > 0) );
-return v->data[v->size-1];
+	assert((v!=NULL) && (sizeDynArr(v) > 0) );
+	return v->data[v->size-1];
 }
 
 /* Removes the element on top of the stack 
@@ -264,7 +273,13 @@ the top has been removed
 */
 void popDynArr(DynArr *v)
 {
-/* FIXME: You will write this function */
+	if(v->size <= 0)
+	{
+		printf("The array is empty\n");
+		return;
+	}
+
+	v->size--;
 }
 
 /* ************************************************************************
@@ -304,7 +319,12 @@ post:size of the bag is reduced by 1
 */
 void removeDynArr(DynArr *v, TYPE val)
 {
-/* FIXME: You will write this function */
+	int i;
+
+	for(i = 0; i < v->size; i++)
+	{
+		if(v->data[i] == val) removeAtDynArr(v, i);
+	}
 }
 
 void printArray(DynArr *v)
