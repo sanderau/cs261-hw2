@@ -61,7 +61,7 @@ int isBalanced(char* s)
 
 	}
 
-
+	return b;
         /* Free the memory allocated to stack, and return b=1 or b=0 */
 
 /* FIXME: You will write this part of the function */
@@ -93,7 +93,23 @@ int main(int argc, char* argv[])
 		printf("Please enter a string to be evaluated.\n");
 */
 
+	DynArr *ex = newDynArr(20);
+	addDynArr(ex, 'h');
+	addDynArr(ex, 'e');
+	addDynArr(ex, 'l');
+	addDynArr(ex, 'l');
+	addDynArr(ex, 'o');
+	addDynArr(ex, ' ');
+	addDynArr(ex, 'w');
+	addDynArr(ex, 'o');
+	addDynArr(ex, 'r');
+	addDynArr(ex, 'l');
+	addDynArr(ex, 'd');
+	addDynArr(ex, '!');
 
+	printArray(ex);
+
+	printf("%d\n", containsDynArr(ex, '!'));
 
 	return 0;
 }

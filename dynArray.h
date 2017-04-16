@@ -38,6 +38,7 @@ void putDynArr(DynArr *v, int pos, TYPE val);
 void swapDynArr(DynArr *v, int i, int  j);
 void removeAtDynArr(DynArr *v, int idx);
 void _dynArrSetCapacity(DynArr *v, int newCap);
+void printArray(DynArr *v);
 
 /* Stack interface. */
 int isEmptyDynArr(DynArr *v);

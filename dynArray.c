@@ -84,7 +84,26 @@ post:v has capacity newCap
 */
 void _dynArrSetCapacity(DynArr *v, int newCap)
 {
-	/* FIXME: You will write this function */
+	TYPE *temp = (TYPE *) malloc(sizeof(TYPE) * newCap);
+	assert(temp != NULL);	
+
+	int i;
+	for(i = 0; i <= v->size; i++)	/*<= because we have to account for the null terminator '\n' */
+	{
+		temp[i] = v->data[i];
+	}
+
+	free(v->data); /*free the old memory*/
+
+	v->data = (TYPE *) malloc(sizeof(TYPE)*newCap);
+	assert(v->data != NULL);
+
+	for(i = 0; i <= v->size; i++)
+	{
+		v->data[i] = temp[i];
+	}
+
+	free(temp); /* free the memory of temp */
 }
 
 /* Get the size of the dynamic array
@@ -110,7 +129,14 @@ post:val is in the last utilized position in the array
 */
 void addDynArr(DynArr *v, TYPE val)
 {
-/* FIXME: You will write this function */
+	if(v->size >= v->capacity)
+	{
+		printf("Your array is full! You need to allocate more memory.\n");
+		return;
+	}
+
+	v->data[v->size] = val;
+	v->size++;
 }
 
 /*Get an element from the dynamic array from a specified position
@@ -257,7 +283,13 @@ post:no changes to the bag
 */
 int containsDynArr(DynArr *v, TYPE val)
 {
-/* FIXME: You will write this function */
+	int i;
+	for(i = 0; i < v->size; i++)
+	{
+		if(v->data[i] == val) return i;
+	}
+	
+	return -1;
 }
 
 /*Removes the first occurrence of the specified value from the collection
@@ -273,4 +305,15 @@ post:size of the bag is reduced by 1
 void removeDynArr(DynArr *v, TYPE val)
 {
 /* FIXME: You will write this function */
+}
+
+void printArray(DynArr *v)
+{
+	int i;
+	for(i = 0; i < v->size; i++)
+	{
+		printf("%c", v->data[i]);
+	}
+
+	printf("\n");
 }
