@@ -34,8 +34,6 @@ int isBalanced(char* s)
 {
 
 	char ch;  /*stores the current character from the input string*/
-	char ts;  /*stores the top element of the stack*/
-	int b=1;  /*Boolean variable b=1 means balanced; b=0 means unbalanced string*/
 
 	DynArr *stack;
 	stack=newDynArr(5);/*initialize stack with capacity = 5*/
@@ -52,28 +50,64 @@ int isBalanced(char* s)
  
 		if(ch=='(' || ch=='[' || ch=='{' )
 			pushDynArr(stack,ch);
+
 		else
 		{
-	
-                        /* FIXME: You will write this part of the function */
+			if(ch == ')' && topDynArr(stack) != ')')
+			{
+				freeDynArr(stack);
+				return 0;
+			}	
 
+			if(ch == ')' && topDynArr(stack) == ')')
+			{
+				popDynArr(stack);
+			}
+	
+			if(ch == '}' && topDynArr(stack) != '{')
+			{
+				freeDynArr(stack);
+				return 0;
+			}	
+
+			if(ch == '}' && topDynArr(stack) == '{')
+			{
+				popDynArr(stack);
+			}	
+
+			if(ch == ']' && topDynArr(stack) != '[')
+			{
+				freeDynArr(stack);
+				return 0;
+			}	
+
+			if(ch == ']' && topDynArr(stack) == '[')
+			{
+				popDynArr(stack);
+			}	
 		}
 
 	}
 
-	return b;
-        /* Free the memory allocated to stack, and return b=1 or b=0 */
 
-/* FIXME: You will write this part of the function */
+	ch = topDynArr(stack);
 
+	freeDynArr(stack);
+
+
+	if(ch == 0)
+		return 1;
+
+	else
+		return 0;
 }
 
 int main(int argc, char* argv[])
 {
-/*
+
 	char* s=argv[1];
 	
-	char s[]="()+x+r*{{{((--{{[()[]]}}))}}}";
+/*	char s[]="()+x+r*{{{((--{{[()[]]}}))}}}"; */
 	
 
 	int res;
@@ -91,25 +125,7 @@ int main(int argc, char* argv[])
 	}
 	else
 		printf("Please enter a string to be evaluated.\n");
-*/
 
-	DynArr *ex = newDynArr(20);
-	addDynArr(ex, 'h');
-	addDynArr(ex, 'e');
-	addDynArr(ex, 'l');
-	addDynArr(ex, 'l');
-	addDynArr(ex, 'o');
-	addDynArr(ex, ' ');
-	addDynArr(ex, 'w');
-	addDynArr(ex, 'o');
-	addDynArr(ex, 'r');
-	addDynArr(ex, 'l');
-	addDynArr(ex, 'd');
-	addDynArr(ex, '!');
-
-	printArray(ex);
-
-	printf("%d\n", containsDynArr(ex, '!'));
 
 	return 0;
 }

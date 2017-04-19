@@ -259,8 +259,13 @@ post:no changes to the stack
 */
 TYPE topDynArr(DynArr *v)
 {
-	assert((v!=NULL) && (sizeDynArr(v) > 0) );
-	return v->data[v->size-1];
+	assert((v!=NULL));
+
+	if(v->size == 0)
+		return 0;
+
+	else
+		return v->data[v->size-1];
 }
 
 /* Removes the element on top of the stack 
@@ -329,6 +334,12 @@ void removeDynArr(DynArr *v, TYPE val)
 
 void printArray(DynArr *v)
 {
+	if(v->size <= 0)
+	{
+		printf("Array is empty");
+		return;
+	}	
+
 	int i;
 	for(i = 0; i < v->size; i++)
 	{
